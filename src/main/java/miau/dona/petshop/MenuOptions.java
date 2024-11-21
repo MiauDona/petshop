@@ -6,16 +6,19 @@ The application must perform the following functions:
 3. Show total pets. // No son las ventas, quiere numerar las mascotas
 4. Show total dogs, cats, birds and rats sold.
 5. Show the owner of a pet entering the owner DNI’s.
-TODO 6. Show the number chip and name of a pet entering the name.
-TODO 7. Showing the characteristics of an animal (sex, age, and its the specific
+6. Show the number chip and name of a pet entering the name. FIXME no se que otro nombre es
+
+7. Showing the characteristics of an animal (sex, age, and its the specific
         characteristics) entering its EAN code.
 TODO 8. Show if 2 pets can be mated by asking the owner for the chip number.
 TODO 9. To Know if a dog, cat, or bird likes a type of food.*/
 
-import miau.dona.ejerciciosclase.clases.petshop.Animals.Bird;
-import miau.dona.ejerciciosclase.clases.petshop.Animals.Cat;
-import miau.dona.ejerciciosclase.clases.petshop.Animals.Dog;
-import miau.dona.ejerciciosclase.clases.petshop.Animals.Rat;
+import miau.dona.petshop.Animals.Bird;
+import miau.dona.petshop.Animals.Cat;
+import miau.dona.petshop.Animals.Dog;
+import miau.dona.petshop.Animals.Rat;
+
+import java.util.Arrays;
 
 public class MenuOptions extends Extra {
     private int moneyAccount = 0;
@@ -101,12 +104,41 @@ public class MenuOptions extends Extra {
         }
     }
     
-    public void showChipAndName(String ownerName) {
+    public void showChipAndName(String name) {
         for (Pet pet : getPets()) {
             if (pet.getOwnerName().equals(name)) {
-                System.out.println(pet);
+                System.out.println(pet.getOwnerName() + " " + pet.getChipNumber());
             }
         }
     }
-    
+
+    public void showCharasteristics(int eanCode, Animal[] animals) {
+        for (Animal animal : animals) {
+            if (eanCode == animal.getEanCode()) {
+                switch (animal) {
+                    case Pet pet -> {
+                        if (pet instanceof Dog) {
+                            System.out.println(((Dog) pet).isPedigree() ? "Is pedigree and its name is " : "Its name is" + pet.getName() + ", its breed is " + ((Dog) pet).getBreed() + ", its color is " + ((Dog) pet).getColor() + ", its hair is " + ((Dog) pet).getTypeHAIR() + ", it is " + pet.getSex() + " and eats: " + Arrays.toString(((Dog) pet).getEats())) ;
+                        } else if (pet instanceof Cat) {
+                            System.out.println("Its name is " + pet.getName() + ", its breed is " + ((Cat) pet).getBreed() + ", its color is " + ((Cat) pet).getColor() + ", its hair is " + ((Cat) pet).getTypeHAIR() + ", it is " + pet.getSex() + " and eats: " + Arrays.toString(((Cat) pet).getEats()));
+                        }
+                    }
+
+                    case Rat rat -> {
+                        System.out.println("This rat weighs " + ((Rat) rat).getWeight() + " kg, its size is " +
+                                ((Rat) rat).getSize() + " cm, it is " + rat.getSex() + ".");
+                    }
+
+                    case Bird bird -> {
+                        System.out.println("This bird's type is " + ((Bird) bird).getType() + ", its color is " +
+                                ((Bird) bird).getColor() + ", it is " + bird.getSex() +
+                                " and eats: " + Arrays.toString(((Bird) bird).getEats()));
+                    }
+
+                    default -> System.out.println("This animal's species is " + animal.getSpecie() + ", it is " + animal.getSex() + ".");
+                }
+            }
+        }
+
+    }
 }

@@ -13,8 +13,13 @@ public abstract class Animal {
     public Animal(int eanCode, int ageDays, char sex, int price) {
         this.eanCode = eanCode;
         this.ageDays = ageDays;
-        this.sex = sex;
         this.price = price;
+
+        if (sex == 'f' || sex == 'm') {
+            this.sex = sex;
+        } else {
+            this.sex = 'f';
+        }
     }
     
     public boolean canMate(Animal couple) {

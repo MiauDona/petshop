@@ -1,9 +1,9 @@
 package miau.dona.petshop;
 
-import miau.dona.ejerciciosclase.clases.petshop.Animals.Bird;
-import miau.dona.ejerciciosclase.clases.petshop.Animals.Cat;
-import miau.dona.ejerciciosclase.clases.petshop.Animals.Dog;
-import miau.dona.ejerciciosclase.clases.petshop.Animals.Rat;
+import miau.dona.petshop.Animals.Bird;
+import miau.dona.petshop.Animals.Cat;
+import miau.dona.petshop.Animals.Dog;
+import miau.dona.petshop.Animals.Rat;
 
 public class Extra {
     private int nPets = 0;

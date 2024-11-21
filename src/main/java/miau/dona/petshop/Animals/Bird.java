@@ -1,6 +1,6 @@
 package miau.dona.petshop.Animals;
 
-import miau.dona.ejerciciosclase.clases.petshop.Animal;
+import miau.dona.petshop.Animal;
 
 public class Bird extends Animal {
     String color;

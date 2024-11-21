@@ -1,6 +1,6 @@
 package miau.dona.petshop.Animals;
 
-import miau.dona.ejerciciosclase.clases.petshop.Pet;
+import miau.dona.petshop.Pet;
 
 public class Dog extends Pet {
     String color;

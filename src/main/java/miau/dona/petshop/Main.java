@@ -49,7 +49,7 @@ TODO 7. Showing the characteristics of an animal (sex, age, and its the specific
 TODO 8. Show if 2 pets can be mated by asking the owner for the chip number.
 TODO 9. To Know if a dog, cat, or bird likes a type of food.*/
 
-import miau.dona.ejerciciosclase.clases.petshop.MenuOptions;
+import miau.dona.petshop.MenuOptions;
 
 public class Main {
     public static void main(String[] args) {
@@ -57,7 +57,7 @@ public class Main {
         
         MenuOptions menuOptions = new MenuOptions();
         
-        menuOptions.
+
     }
     
     
