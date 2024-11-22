@@ -56,9 +56,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Animal[] animals = Extra.declareAnimals();
-        
         Scanner scanner = new Scanner(System.in);
         MenuOptions menuOptions = new MenuOptions();
+        menuOptions.classifyAnimals(animals);
+        menuOptions.countAnimals(animals);
+        
         int option = -1;
         
         while (option != 0) {
@@ -117,9 +119,54 @@ public class Main {
                 }
                 
                 case 2 -> {
+                    menuOptions.showTotalSold();
+                }
+                
+                case 3 -> {
+                    menuOptions.showNumberPets();
+                }
+                
+                case 4 -> {
                     menuOptions.showAnimalsSold();
                 }
                 
+                case 5 -> {
+                    System.out.println("Enter DNI");
+                    String dni = scanner.next();
+                    menuOptions.showOwnPets(dni);
+                }
+                
+                case 6 -> {
+                    
+                }
+                
+                case 7 -> {
+                    System.out.println("Enter EANCODE");
+                    int eanCode = scanner.nextInt();
+                    menuOptions.showCharasteristics(eanCode,animals);
+                }
+                
+                case 8 -> {
+                    System.out.println("Enter first eancode");
+                    int firstEanCode = scanner.nextInt();
+
+                    System.out.println("Enter second eancode");
+                    int secondEanCode = scanner.nextInt();
+                    
+                    menuOptions.canMate(firstEanCode, secondEanCode);
+                }
+                case 9 -> {
+                    System.out.println("Give me its EANCode");
+                    int eanCode = scanner.nextInt();
+                    System.out.println("What do you want to know if it eats it? ('Meat', 'Fish', Feed', 'Bones')");
+                    String food = scanner.next();
+                    for(Animal animal1 : animals) {
+                        if(animal1.getEanCode() == eanCode) {
+                            menuOptions.doLikeFood(animal1, food);
+                            break;
+                        }
+                    }
+                }
                 default -> {
                     System.out.println("Invalid option");
                 }

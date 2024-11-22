@@ -38,13 +38,13 @@ public class Extra {
         Cat cat5 = new Cat(654321, 213, 'm', "gris", "bengalí", "Rápido", 3012);
         Dog dog5 = new Dog(654987, 298, 'f', "blanco", "poodle", "Suave", true, 435);
         Bird bird5 = new Bird(486395, 19, 'm', "morado", "canario");
-
+        
         return new Animal[] {rat, dog, bird, cat, rat2, rat3, rat4, rat5, dog2, dog3, dog4, dog5, bird2,
                 bird3, bird4, bird5, cat2, cat3, cat4, cat5};
 
     }
 
-    protected void countAnimals(Animal[] animals) {
+    public void countAnimals(Animal[] animals) {
         for (Animal animal : animals) {
             switch (animal) {
                 case Pet petTest ->  {
@@ -61,7 +61,7 @@ public class Extra {
             }
         }
     }
-    protected void classifyAnimals(Animal[] animals) {
+    public void classifyAnimals(Animal[] animals) {
         this.pets = new Pet[this.nPets];
         this.rats = new Rat[this.nRats];
         this.birds = new Bird[this.nBirds];
@@ -83,7 +83,7 @@ public class Extra {
                 }
                 case Rat ratTest -> {
                     nRats--;
-                    rats[nRats] = (Rat) ratTest;
+                    rats[nRats+1] = (Rat) ratTest;
                 }
                 case Bird birdTest -> {
                     nBirds--;
