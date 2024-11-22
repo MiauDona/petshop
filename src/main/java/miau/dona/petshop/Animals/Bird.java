@@ -12,12 +12,9 @@ public class Bird extends Animal {
         this.color = color;
         this.type = type;
         setSpecie("Bird");
+        setEats(eats);
     }
-
-    public String[] getEats() {
-        return eats;
-    }
-
+    
     public String getType() {
         return type;
     }

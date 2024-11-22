@@ -38,10 +38,10 @@ Animals can mate as long as one of them is male and the other female and they
 are of the same type. Rats are not allowed to mate (prohibited).
 
 The application must perform the following functions:
-TODO 1. Sell an animal/s and show its final price.
+TODO 1. Sell an animal/s and show its final price. FIXME como se identifica al animal
 TODO 2. Show total animals sold.
 TODO 3. Show total pets.
-TODO 4. Show total dogs, cats, birds and rats sold.
+TODO 4. Show total dogs, cats, birds and rats sold. 
 TODO 5. Show the owner of a pet entering the owner DNI’s.
 TODO 6. Show the number chip and name of a pet entering the name.
 TODO 7. Showing the characteristics of an animal (sex, age, and its the specific
@@ -51,13 +51,80 @@ TODO 9. To Know if a dog, cat, or bird likes a type of food.*/
 
 import miau.dona.petshop.MenuOptions;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         Animal[] animals = Extra.declareAnimals();
         
+        Scanner scanner = new Scanner(System.in);
         MenuOptions menuOptions = new MenuOptions();
+        int option = -1;
         
-
+        while (option != 0) {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("""
+                    Welcome to the PetShop menu \
+                    
+                    Select an option only typing the number. TO LEAVE TYPE 0 \
+                    
+                    \
+                    
+                    1. Sell an animal/s and show its final price. \
+                    
+                    2. Show total animals sold. \
+                    
+                    3. Show total pets. \
+                    
+                    4. Show total dogs, cats, birds and rats sold. \
+                    
+                    5. Show the owner of a pet entering the owner DNI’s. \
+                    
+                    6. Show the number chip and name of a pet entering the name. \
+                    
+                    7. Showing the characteristics of an animal (sex, age, and its the specific
+                    characteristics) entering its EAN code. \
+                    
+                    8. Show if 2 pets can be mated by asking the owner for the chip number. \
+                    
+                    9. To Know if a dog, cat, or bird likes a type of food. \
+                    
+                    \
+                    
+                    INPUT YOUR NUMBER NOW
+                    """);
+            Animal animal = null;
+            option = scanner.nextInt();
+            
+            switch (option) {
+                case 0 -> {
+                    System.out.println("Leaving...");
+                }
+                case 1 -> {
+                    System.out.println("Give me its EANCode");
+                    int eanCode = scanner.nextInt();
+                    for(Animal animal1 : animals) {
+                        if(animal1.getEanCode() == eanCode) {
+                            menuOptions.sellAnimalShowPrice(animal1);
+                            System.out.println("Se ha vendido\n\n\n\n\n");
+                            break;
+                        }
+                    }
+                }
+                
+                case 2 -> {
+                    menuOptions.showAnimalsSold();
+                }
+                
+                default -> {
+                    System.out.println("Invalid option");
+                }
+            }
+        }
     }
     
     

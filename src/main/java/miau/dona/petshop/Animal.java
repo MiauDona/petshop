@@ -9,6 +9,7 @@ public abstract class Animal {
     private int price = 0;
     private String specie;
     private int animalsSold = 0;
+    private String[] eats;
 
     public Animal(int eanCode, int ageDays, char sex, int price) {
         this.eanCode = eanCode;
@@ -20,10 +21,6 @@ public abstract class Animal {
         } else {
             this.sex = 'f';
         }
-    }
-    
-    public boolean canMate(Animal couple) {
-        return getSex() != couple.getSex() && Objects.equals(getSpecie(), couple.getSpecie());
     }
 
     public void setSpecie(String specie) {
@@ -56,5 +53,13 @@ public abstract class Animal {
 
     public int getPrice() {
         return price;
+    }
+    
+    public String[] getEats() {
+        return eats;
+    }
+    
+    public void setEats(String[] eats) {
+        this.eats = eats;
     }
 }

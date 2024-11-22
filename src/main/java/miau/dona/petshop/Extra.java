@@ -20,7 +20,7 @@ public class Extra {
     public static Animal[] declareAnimals() {
         Rat rat = new Rat(13241513, 20, 'f', 10.3f, 2.1f);
         Cat cat = new Cat(253245, 243, 'm', "blue", "persa", "Suave", 3241);
-        Dog dog = new Dog(253245, 243, 'm', "naranja", "labrador", "Suave", true, 356);
+        Dog dog = new Dog(25323545, 243, 'm', "naranja", "labrador", "Suave", true, 356);
         Bird bird = new Bird(43523, 34, 'f', "rojo", "Loro");
         Rat rat2 = new Rat(15462134, 15, 'm', 9.1f, 1.8f);
         Cat cat2 = new Cat(423154, 222, 'f', "green", "siamés", "Lento", 1457);

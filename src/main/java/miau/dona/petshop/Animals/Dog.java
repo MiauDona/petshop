@@ -16,6 +16,7 @@ public class Dog extends Pet {
         this.typeHAIR = typeHAIR;
         this.pedigree = pedigree;
         setSpecie("Dog");
+        setEats(eats);
     }
 
     public String getColor() {

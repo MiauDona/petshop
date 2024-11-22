@@ -10,8 +10,9 @@ The application must perform the following functions:
 
 7. Showing the characteristics of an animal (sex, age, and its the specific
         characteristics) entering its EAN code.
-TODO 8. Show if 2 pets can be mated by asking the owner for the chip number.
-TODO 9. To Know if a dog, cat, or bird likes a type of food.*/
+8. Show if 2 pets can be mated by asking the owner for the chip number.
+9. To Know if a dog, cat, or bird likes a type of food.
+ */
 
 import miau.dona.petshop.Animals.Bird;
 import miau.dona.petshop.Animals.Cat;
@@ -19,6 +20,7 @@ import miau.dona.petshop.Animals.Dog;
 import miau.dona.petshop.Animals.Rat;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class MenuOptions extends Extra {
     private int moneyAccount = 0;
@@ -28,7 +30,8 @@ public class MenuOptions extends Extra {
     private int dogSells = 0;
     private int petSells = catSells + birdSells + dogSells;
     private int animalSells = ratSells + catSells + birdSells + dogSells + petSells;
-
+    
+    
     public int getMoneyAccount() {
         return moneyAccount;
     }
@@ -139,6 +142,52 @@ public class MenuOptions extends Extra {
                 }
             }
         }
-
     }
+
+    public boolean canMate(int chipNumber1, int chipNumber2) {
+        Pet pet1 = null;
+        Pet pet2 = null;
+        
+        for (Pet pet : getPets()) {
+            if (pet.getChipNumber() == chipNumber1) {
+               pet1 = pet;
+            } else if (pet.getChipNumber() == chipNumber2) {
+                pet2 = pet;
+            }
+        }
+        
+        if (pet1 == null) {
+            System.out.println(chipNumber1 + " no se ha encontrado");
+            return false;
+        } else if (pet2 == null) {
+            System.out.println(chipNumber2 + " no se ha encontrado");
+            return false;
+        }
+        
+        if (pet1.getSex() != pet2.getSex()) {
+            System.out.println("They can mate");
+            return true;
+        } else {
+            System.out.println("They cannot mate");
+            return false;
+        }
+    }
+    
+    public boolean doLikeFood(Animal animal, String food) {
+        if (animal instanceof Rat) {
+            System.out.println("It doesn't eat anything from here");
+            
+        } else {
+            for(String fooood : animal.getEats()) {
+                if(fooood.equals(food)) {
+                    System.out.println(animal.getSpecie() + " likes " + food);
+                    return true;
+                }
+            }
+        }
+
+        System.out.println(animal.getSpecie() + " doesn't like " + food);
+        return false;
+    }
+    
 }

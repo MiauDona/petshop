@@ -14,6 +14,7 @@ public class Cat extends Pet {
         this.breed = breed;
         this.typeHAIR = typeHAIR;
         setSpecie("Cat");
+        setEats(eats);
     }
 
     public String getColor() {
