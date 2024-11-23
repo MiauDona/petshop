@@ -18,12 +18,14 @@ import miau.dona.petshop.Animals.Bird;
 import miau.dona.petshop.Animals.Cat;
 import miau.dona.petshop.Animals.Dog;
 import miau.dona.petshop.Animals.Rat;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class MenuOptions extends Extra {
-    private int moneyAccount = 0;
+    private float moneyAccount = 0;
     private int ratSells = 0;
     private int catSells = 0;
     private int birdSells = 0;
@@ -32,7 +34,7 @@ public class MenuOptions extends Extra {
     private int animalSells = ratSells + catSells + birdSells + dogSells + petSells;
     
     
-    public int getMoneyAccount() {
+    public float getMoneyAccount() {
         return moneyAccount;
     }
 
@@ -41,6 +43,7 @@ public class MenuOptions extends Extra {
     }
 
     public void sellAnimalShowPrice(Animal animal) {
+        float price = animal.getPrice();
         switch (animal) {
             case Pet pet -> {
                 if (pet instanceof Dog) {
@@ -48,11 +51,25 @@ public class MenuOptions extends Extra {
                 } else if (pet instanceof Cat) {
                     catSells++;
                 }
-                pet.setOwner("Dueño", "Apellido", "894523j", "animalito");
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Write the owner's name (only name)");
+                String ownerName = scanner.nextLine();
+
+                System.out.println("Write the owner's surname");
+                String surname = scanner.nextLine();
+
+                System.out.println("Owner's DNI (with letter)");
+                String dni = scanner.nextLine();
+
+                System.out.println("What's the pet's name?");
+                String petName = scanner.nextLine();
+
+                pet.setOwner(ownerName, surname, dni, petName);
                 petSells++;
             }
             
             case Rat rat -> {
+                price = rat.getPrice() * rat.getWeight();
                 ratSells++;
             }
             
@@ -64,8 +81,9 @@ public class MenuOptions extends Extra {
         }
         
         animalSells++;
-        this.moneyAccount+= animal.getPrice();
-        System.out.println(animal.getPrice());
+        this.moneyAccount+= price;
+
+        System.out.println("Sold by " + price + "€");
     }
     
     public void showTotalSold() {
@@ -96,14 +114,19 @@ public class MenuOptions extends Extra {
     }
     
     public void showNumberPets() {
-        System.out.println(getPets().length); 
+        System.out.println(getPets().length-petSells);
     }
     
     public void showOwnPets(String dni) {
+        boolean ownsSomething = false;
         for (Pet pet : getPets()) {
-            if (pet.getDNI().equals(dni)) {
-                System.out.println(pet);
+            if (pet.getDNI() != null && pet.getDNI().equals(dni)) {
+                ownsSomething = true;
+                System.out.println("You own " + pet.getName());
             }
+        }
+        if (!ownsSomething) {
+            System.out.println("You don't own any pets");
         }
     }
     

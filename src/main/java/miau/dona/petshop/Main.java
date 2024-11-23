@@ -58,18 +58,23 @@ public class Main {
         Animal[] animals = Extra.declareAnimals();
         Scanner scanner = new Scanner(System.in);
         MenuOptions menuOptions = new MenuOptions();
-        menuOptions.classifyAnimals(animals);
         menuOptions.countAnimals(animals);
+        menuOptions.classifyAnimals(animals);
+
         
         int option = -1;
         
         while (option != 0) {
             try {
-                Thread.sleep(3000);
+                Thread.sleep(1500);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
             System.out.println("""
+                    \
+                    
+                    \
+                    
                     Welcome to the PetShop menu \
                     
                     Select an option only typing the number. TO LEAVE TYPE 0 \
@@ -97,8 +102,7 @@ public class Main {
                     
                     \
                     
-                    INPUT YOUR NUMBER NOW
-                    """);
+                    INPUT YOUR NUMBER NOW""");
             Animal animal = null;
             option = scanner.nextInt();
             
@@ -109,13 +113,19 @@ public class Main {
                 case 1 -> {
                     System.out.println("Give me its EANCode");
                     int eanCode = scanner.nextInt();
+                    boolean found = false;
+
                     for(Animal animal1 : animals) {
                         if(animal1.getEanCode() == eanCode) {
                             menuOptions.sellAnimalShowPrice(animal1);
-                            System.out.println("Se ha vendido\n\n\n\n\n");
+                            found = true;
                             break;
                         }
                     }
+                    if (!found) {
+                        System.out.println("We couldn't find your animal");
+                    }
+
                 }
                 
                 case 2 -> {
@@ -136,17 +146,17 @@ public class Main {
                     menuOptions.showOwnPets(dni);
                 }
                 
-                case 6 -> {
+                case 6 -> { // FIXME
                     
                 }
                 
-                case 7 -> {
+                case 7 -> { // FIXME
                     System.out.println("Enter EANCODE");
                     int eanCode = scanner.nextInt();
                     menuOptions.showCharasteristics(eanCode,animals);
                 }
                 
-                case 8 -> {
+                case 8 -> { // FIXME
                     System.out.println("Enter first eancode");
                     int firstEanCode = scanner.nextInt();
 

@@ -8,7 +8,7 @@ public class Bird extends Animal {
     String[] eats = {"Feed"};
     
     public Bird(int eanCode, int ageDays, char sex, String color, String type) {
-        super(ageDays, eanCode, sex, 10);
+        super(eanCode, ageDays, sex, 10);
         this.color = color;
         this.type = type;
         setSpecie("Bird");
