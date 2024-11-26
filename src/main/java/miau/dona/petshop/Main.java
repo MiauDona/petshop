@@ -143,7 +143,7 @@ public class Main {
                     option7();
                 }
                 
-                case 8 -> { // FIXME -- No funciona el reconocimienot de eannumber y ademas tiene que ser de chip number
+                case 8 -> {
                     option8();
                 }
 
@@ -228,13 +228,14 @@ public class Main {
     }
 
     public static void option8() {
-        System.out.println("Enter first eancode");
-        int firstEanCode = scanner.nextInt();
+        System.out.println("Enter first chipnumber");
+        System.out.println("(Should be the same as the EANCode for simplicity and testing)");
+        int firtschipNumber = scanner.nextInt();
 
-        System.out.println("Enter second eancode");
-        int secondEanCode = scanner.nextInt();
+        System.out.println("Enter second chipnumber");
+        int secondchipNumber = scanner.nextInt();
 
-        menuOptions.canMate(firstEanCode, secondEanCode);
+        menuOptions.canMate(firtschipNumber, secondchipNumber);
     }
 
     public static void option9() {

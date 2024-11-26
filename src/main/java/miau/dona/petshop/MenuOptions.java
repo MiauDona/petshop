@@ -178,15 +178,24 @@ public class MenuOptions extends Extra {
         
         for (Pet pet : getPets()) {
             if (pet.getChipNumber() == chipNumber1) {
-               pet1 = pet;
+                System.out.println("Pet with id: " + pet.getChipNumber() + "found");
+                pet1 = pet;
+                System.out.println(pet.getChipNumber());
+                
             } else if (pet.getChipNumber() == chipNumber2) {
+                System.out.println("Pet with id: " + pet.getChipNumber() + "found");
                 pet2 = pet;
+                System.out.println(pet.getChipNumber());
             }
         }
+        
+        System.out.println(pet1 != null ? pet1.getEanCode() : 0);
+        System.out.println(pet2 != null ? pet2.getEanCode() : 0);
         
         if (pet1 == null) {
             System.out.println(chipNumber1 + " no se ha encontrado");
             return false;
+            
         } else if (pet2 == null) {
             System.out.println(chipNumber2 + " no se ha encontrado");
             return false;
@@ -195,26 +204,27 @@ public class MenuOptions extends Extra {
         if (pet1.getSex() != pet2.getSex()) {
             System.out.println("They can mate");
             return true;
+            
         } else {
             System.out.println("They cannot mate");
             return false;
         }
     }
     
-    public boolean doLikeFood(Animal animal, String food) {
+    public boolean doLikeFood(Animal animal, String userFood) {
         if (animal instanceof Rat) {
             System.out.println("It doesn't eat anything from here");
             
         } else {
-            for(String fooood : animal.getEats()) {
-                if(fooood.equals(food)) {
-                    System.out.println(animal.getSpecie() + " likes " + food);
+            for(String food : animal.getEats()) {
+                if(food.equals(userFood)) {
+                    System.out.println(animal.getSpecie() + " likes " + userFood);
                     return true;
                 }
             }
         }
 
-        System.out.println(animal.getSpecie() + " doesn't like " + food);
+        System.out.println(animal.getSpecie() + " doesn't like " + userFood);
         return false;
     }
     
