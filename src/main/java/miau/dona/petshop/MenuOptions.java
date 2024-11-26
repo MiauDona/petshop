@@ -44,11 +44,14 @@ public class MenuOptions extends Extra {
 
     public void sellAnimalShowPrice(Animal animal) {
         float price = animal.getPrice();
+
         switch (animal) {
             case Pet pet -> {
                 if (pet instanceof Dog) {
+                    System.out.println("It's a dog");
                     dogSells++;
                 } else if (pet instanceof Cat) {
+                    System.out.println("It's a cat");
                     catSells++;
                 }
                 Scanner scanner = new Scanner(System.in);
@@ -69,15 +72,17 @@ public class MenuOptions extends Extra {
             }
             
             case Rat rat -> {
+                System.out.println("It's a rat");
                 price = rat.getPrice() * rat.getWeight();
                 ratSells++;
             }
             
             case Bird bird -> {
+                System.out.println("It's a bird");
                 birdSells++;
             }
             
-            default -> System.out.println("No se reconoce ese animal, pero se contara una venta generica");
+            default -> System.out.println("Animal not recognized. Anyways, it is sold.");
         }
         
         animalSells++;

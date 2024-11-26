@@ -1,7 +1,7 @@
 package miau.dona.petshop;
 
 /* 
-Make a program that implements the operation of “pet shop”. The shop will sell
+Make a program that implements the operation of "pet shop". The shop will sell
 various types of animals. All animals have in common is that they are characterized by
 their sex (which must be MALE or FEMALE), the age of the animal (measured in days)
 and EAN code. 
@@ -24,7 +24,7 @@ The animals eat:
 TODO When an animal is sold, it should be reflected in some variable to show the number
  of animals that have been sold in the shop. The prices of each animal is (per unit):
 • Cat: 50€.
-• Dog:100€ (without pedigree), 200€ (with pedigree).
+• Dog: 100€ (without pedigree), 200€ (with pedigree).
 • Bird:10€
 • Rat:2€
 
@@ -38,7 +38,7 @@ Animals can mate as long as one of them is male and the other female and they
 are of the same type. Rats are not allowed to mate (prohibited).
 
 The application must perform the following functions:
-TODO 1. Sell an animal/s and show its final price. FIXME como se identifica al animal
+TODO 1. Sell an animal/s and show its final price.
 TODO 2. Show total animals sold.
 TODO 3. Show total pets.
 TODO 4. Show total dogs, cats, birds and rats sold. 
@@ -49,19 +49,22 @@ TODO 7. Showing the characteristics of an animal (sex, age, and its the specific
 TODO 8. Show if 2 pets can be mated by asking the owner for the chip number.
 TODO 9. To Know if a dog, cat, or bird likes a type of food.*/
 
+import miau.dona.petshop.Animals.Bird;
 import miau.dona.petshop.MenuOptions;
 
 import java.util.Scanner;
 
 public class Main {
+    static Animal[] animals = Extra.declareAnimals();
+    static MenuOptions menuOptions = new MenuOptions();
+    static Scanner scanner = new Scanner(System.in);
+    static int[] sold = new int[animals.length];
+    static int soldPosition = 0;
+
     public static void main(String[] args) {
-        Animal[] animals = Extra.declareAnimals();
-        Scanner scanner = new Scanner(System.in);
-        MenuOptions menuOptions = new MenuOptions();
         menuOptions.countAnimals(animals);
         menuOptions.classifyAnimals(animals);
 
-        
         int option = -1;
         
         while (option != 0) {
@@ -76,6 +79,8 @@ public class Main {
                     \
                     
                     Welcome to the PetShop menu \
+                    
+                    (for testing EANCodes are from 1 to 20, check them out on Extra.java) \
                     
                     Select an option only typing the number. TO LEAVE TYPE 0 \
                     
@@ -111,79 +116,142 @@ public class Main {
                     System.out.println("Leaving...");
                 }
                 case 1 -> {
-                    System.out.println("Give me its EANCode");
-                    int eanCode = scanner.nextInt();
-                    boolean found = false;
-
-                    for(Animal animal1 : animals) {
-                        if(animal1.getEanCode() == eanCode) {
-                            menuOptions.sellAnimalShowPrice(animal1);
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (!found) {
-                        System.out.println("We couldn't find your animal");
-                    }
-
+                    option1();
                 }
                 
                 case 2 -> {
-                    menuOptions.showTotalSold();
+                    option2();
                 }
                 
                 case 3 -> {
-                    menuOptions.showNumberPets();
+                    option3();
                 }
                 
                 case 4 -> {
-                    menuOptions.showAnimalsSold();
+                    option4();
                 }
                 
                 case 5 -> {
-                    System.out.println("Enter DNI");
-                    String dni = scanner.next();
-                    menuOptions.showOwnPets(dni);
+                    option5();
                 }
                 
                 case 6 -> { // FIXME
-                    
+                    option6();
                 }
                 
-                case 7 -> { // FIXME
-                    System.out.println("Enter EANCODE");
-                    int eanCode = scanner.nextInt();
-                    menuOptions.showCharasteristics(eanCode,animals);
+                case 7 -> {
+                    option7();
                 }
                 
-                case 8 -> { // FIXME
-                    System.out.println("Enter first eancode");
-                    int firstEanCode = scanner.nextInt();
+                case 8 -> { // FIXME -- No funciona el reconocimienot de eannumber y ademas tiene que ser de chip number
+                    option8();
+                }
 
-                    System.out.println("Enter second eancode");
-                    int secondEanCode = scanner.nextInt();
-                    
-                    menuOptions.canMate(firstEanCode, secondEanCode);
-                }
                 case 9 -> {
-                    System.out.println("Give me its EANCode");
-                    int eanCode = scanner.nextInt();
-                    System.out.println("What do you want to know if it eats it? ('Meat', 'Fish', Feed', 'Bones')");
-                    String food = scanner.next();
-                    for(Animal animal1 : animals) {
-                        if(animal1.getEanCode() == eanCode) {
-                            menuOptions.doLikeFood(animal1, food);
-                            break;
-                        }
-                    }
+                    option9();
                 }
+
                 default -> {
                     System.out.println("Invalid option");
                 }
             }
         }
     }
-    
+
+
+    public static void option1() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Give me its EANCode");
+        int eanCode = scanner.nextInt();
+
+        boolean found = false;
+
+        for (int eancodeIsSold : sold) {
+            if (eancodeIsSold == eanCode) {
+                found = true;
+                System.out.println("Animal has been sold before");
+            }
+        }
+
+        if (!found) {
+            for(Animal animal1 : animals) {
+                if(animal1.getEanCode() == eanCode) {
+                    menuOptions.sellAnimalShowPrice(animal1);
+                    sold[soldPosition] = animal1.getEanCode();
+                    soldPosition++;
+
+                    found = true;
+                    break;
+                }
+            }
+        }
+
+        if (!found) {
+            System.out.println("We couldn't find your animal");
+        }
+
+        System.out.println("Want to sell another animal? (Y/N)");
+
+        if (scanner.next().equalsIgnoreCase("Y")) {
+            option1();
+        }
+    }
+
+    public static void option2() {
+        menuOptions.showTotalSold();
+    }
+
+    public static void option3() {
+        menuOptions.showNumberPets();
+    }
+
+    public static void option4() {
+        menuOptions.showAnimalsSold();
+    }
+
+    public static void option5() {
+        System.out.println("Enter DNI");
+        String dni = scanner.next();
+
+        menuOptions.showOwnPets(dni);
+    }
+
+    public static void option6() {
+
+    }
+
+    public static void option7() {
+        System.out.println("Enter EANCODE");
+        int eanCode = scanner.nextInt();
+        menuOptions.showCharasteristics(eanCode,animals);
+    }
+
+    public static void option8() {
+        System.out.println("Enter first eancode");
+        int firstEanCode = scanner.nextInt();
+
+        System.out.println("Enter second eancode");
+        int secondEanCode = scanner.nextInt();
+
+        menuOptions.canMate(firstEanCode, secondEanCode);
+    }
+
+    public static void option9() {
+        System.out.println("Give me its EANCode");
+        int eanCode = scanner.nextInt();
+
+        System.out.println("What do you want to know if it eats it? ('Meat', 'Fish', Feed', 'Bones')");
+        String food = scanner.next();
+
+        for(Animal animal1 : animals) {
+            if(animal1.getEanCode() == eanCode) {
+                menuOptions.doLikeFood(animal1, food);
+                break;
+            }
+        }
+    }
+
     
     
 }

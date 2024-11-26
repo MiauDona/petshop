@@ -6,7 +6,7 @@ public class Bird extends Animal {
     String color;
     String type;
     String[] eats = {"Feed"};
-    
+
     public Bird(int eanCode, int ageDays, char sex, String color, String type) {
         super(eanCode, ageDays, sex, 10);
         this.color = color;
