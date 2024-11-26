@@ -137,8 +137,11 @@ public class MenuOptions extends Extra {
     
     public void showChipAndName(String name) {
         for (Pet pet : getPets()) {
-            if (pet.getOwnerName().equals(name)) {
-                System.out.println(pet.getOwnerName() + " " + pet.getChipNumber());
+            if (pet.getName() != null && pet.getName().equals(name)) {
+                System.out.println("Name: " + pet.getName() + 
+                        "\nChip number: " + pet.getChipNumber() +
+                        "\nOwner's name: " + pet.getOwnerName() +
+                        "\nOwner surname: " + pet.getSurname());
             }
         }
     }

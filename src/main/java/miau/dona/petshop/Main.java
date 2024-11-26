@@ -157,8 +157,7 @@ public class Main {
             }
         }
     }
-
-
+    
     public static void option1() {
         Scanner scanner = new Scanner(System.in);
 
@@ -218,7 +217,14 @@ public class Main {
     }
 
     public static void option6() {
-
+        System.out.println("Names of the pets that has been sold:");
+        boolean anyPet = menuOptions.showNameOfSoldPets(); // No encuentra la mascota despues de delcararla y pone aun asi que no hay ninguna.
+        
+        if (anyPet) {
+            System.out.println("\nInput the name of the pet");
+            String name = scanner.next();
+            menuOptions.showChipAndName(name);
+        }
     }
 
     public static void option7() {

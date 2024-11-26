@@ -42,7 +42,6 @@ public class Extra {
         
         return new Animal[] {rat, dog, bird, cat, rat2, rat3, rat4, rat5, dog2, dog3, dog4, dog5, bird2,
                 bird3, bird4, bird5, cat2, cat3, cat4, cat5};
-
     }
 
     public void countAnimals(Animal[] animals) {
@@ -94,6 +93,21 @@ public class Extra {
                 default -> System.out.println("Animal no reconocido");
             }
         }
+    }
+
+    public boolean showNameOfSoldPets() {
+        if (sold[0] == 0) { 
+            System.out.println("There are no pets sold");
+            return false;
+        }
+        for (Pet pet : pets) {
+            for (int soldCode : sold) { // Devuelve null
+                if (pet.getEanCode() == soldCode) {
+                    System.out.print(pet.getName() + " ");
+                }
+            }
+        }
+        return true;
     }
 
     public Bird[] getBirds() {
