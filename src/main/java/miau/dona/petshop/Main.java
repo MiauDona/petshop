@@ -68,16 +68,7 @@ public class Main {
         int option = -1;
         
         while (option != 0) {
-            try {
-                Thread.sleep(1500);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
             System.out.println("""
-                    \
-                    
-                    \
-                    
                     Welcome to the PetShop menu \
                     
                     (for testing EANCodes are from 1 to 20, check them out on Extra.java) \
@@ -96,7 +87,7 @@ public class Main {
                     
                     5. Show the owner of a pet entering the owner DNI’s. \
                     
-                    6. Show the number chip and name of a pet entering the name. \
+                    6. Show the number chip and name of a pet entering the name of the pet. \
                     
                     7. Showing the characteristics of an animal (sex, age, and its the specific
                     characteristics) entering its EAN code. \
@@ -155,13 +146,24 @@ public class Main {
                     System.out.println("Invalid option");
                 }
             }
+            if (option != 1) {
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            spaceLines();
         }
     }
     
     public static void option1() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Give me its EANCode");
+        System.out.println("Here are all EANCodes");
+        showAllEANCodes();
+        
+        System.out.println("\nGive me its EANCode");
         int eanCode = scanner.nextInt();
 
         boolean found = false;
@@ -218,13 +220,18 @@ public class Main {
 
     public static void option6() {
         System.out.println("Names of the pets that has been sold:");
+        System.out.print("[");
         boolean anyPet = showNameOfSoldPets(); // No encuentra la mascota despues de delcararla y pone aun asi que no hay ninguna.
-        
+        System.out.print("]");
         if (anyPet) {
             System.out.println("\nInput the name of the pet");
             String name = scanner.next();
             menuOptions.showChipAndName(name);
+        } else {
+            System.out.println("There are no pets sold");
         }
+        
+        
     }
 
     public static void option7() {
@@ -268,11 +275,35 @@ public class Main {
         for (Pet pet : menuOptions.getPets()) {
             for (int soldCode : sold) { // Devuelve null
                 if (pet.getEanCode() == soldCode) {
-                    System.out.print(pet.getName() + " ");
+                    System.out.print("[" + pet.getName() + "] ");
                 }
             }
         }
         return true;
     }
+    
+    public static void spaceLines() {
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    }
+
+    public static void showAllEANCodes() {
+        System.out.print("[");
+        for (Animal animal : animals) {
+            boolean isSold = false;
+            
+            for (int i : sold) {
+                if (animal.getEanCode() == i) {
+                    isSold = true;
+                    break;
+                }
+            }
+            
+            if (!isSold) {
+                System.out.print("[" + animal.getEanCode() + "]");
+            }
+        }
+        System.out.print("]");
+    }
+    
     
 }

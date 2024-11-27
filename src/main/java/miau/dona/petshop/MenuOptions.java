@@ -136,15 +136,23 @@ public class MenuOptions extends Extra {
     }
     
     public void showChipAndName(String name) {
+        boolean found = false;
         for (Pet pet : getPets()) {
-            if (pet.getName() != null && pet.getName().equals(name)) {
+            if (pet.getName() != null && pet.getName().trim().equalsIgnoreCase(name.trim())) {
                 System.out.println("Name: " + pet.getName() + 
                         "\nChip number: " + pet.getChipNumber() +
                         "\nOwner's name: " + pet.getOwnerName() +
                         "\nOwner surname: " + pet.getSurname());
+                found = true;
             }
         }
+        
+        if (!found) {
+            System.out.println("No chip found");
+        }
     }
+    
+    
 
     public void showCharasteristics(int eanCode, Animal[] animals) {
         for (Animal animal : animals) {
