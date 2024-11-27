@@ -95,20 +95,7 @@ public class Extra {
         }
     }
 
-    public boolean showNameOfSoldPets() {
-        if (sold[0] == 0) { 
-            System.out.println("There are no pets sold");
-            return false;
-        }
-        for (Pet pet : pets) {
-            for (int soldCode : sold) { // Devuelve null
-                if (pet.getEanCode() == soldCode) {
-                    System.out.print(pet.getName() + " ");
-                }
-            }
-        }
-        return true;
-    }
+    
 
     public Bird[] getBirds() {
         return birds;

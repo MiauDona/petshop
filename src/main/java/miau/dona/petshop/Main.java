@@ -218,7 +218,7 @@ public class Main {
 
     public static void option6() {
         System.out.println("Names of the pets that has been sold:");
-        boolean anyPet = menuOptions.showNameOfSoldPets(); // No encuentra la mascota despues de delcararla y pone aun asi que no hay ninguna.
+        boolean anyPet = showNameOfSoldPets(); // No encuentra la mascota despues de delcararla y pone aun asi que no hay ninguna.
         
         if (anyPet) {
             System.out.println("\nInput the name of the pet");
@@ -259,6 +259,20 @@ public class Main {
         }
     }
 
-    
+    public static boolean showNameOfSoldPets() {
+        if (sold[0] == 0) {
+            System.out.println("There are no pets sold");
+            return false;
+        }
+
+        for (Pet pet : menuOptions.getPets()) {
+            for (int soldCode : sold) { // Devuelve null
+                if (pet.getEanCode() == soldCode) {
+                    System.out.print(pet.getName() + " ");
+                }
+            }
+        }
+        return true;
+    }
     
 }
