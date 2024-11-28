@@ -49,18 +49,15 @@ TODO 7. Showing the characteristics of an animal (sex, age, and its the specific
 TODO 8. Show if 2 pets can be mated by asking the owner for the chip number.
 TODO 9. To Know if a dog, cat, or bird likes a type of food.*/
 
+import java.awt.*;
 import java.util.Scanner;
 
 public class Main {
-    static Animal[] animals = Extra.declareAnimals();
-    static MenuOptions menuOptions = new MenuOptions();
-    static Scanner scanner = new Scanner(System.in);
-    static int[] sold = new int[animals.length];
-    static int soldPosition = 0;
 
     public static void main(String[] args) {
-        menuOptions.countAnimals(animals);
-        menuOptions.classifyAnimals(animals);
+        MenuOptions menuOptions = new MenuOptions();
+        
+        Scanner scanner = new Scanner(System.in);
 
         int option = -1;
         
@@ -96,7 +93,6 @@ public class Main {
                     \
                     
                     INPUT YOUR NUMBER NOW""");
-            Animal animal = null;
             option = scanner.nextInt();
             
             switch (option) {
@@ -105,48 +101,48 @@ public class Main {
                 }
                 case 1 -> {
                     System.out.println("1. Sell an animal/s and show its final price.");
-                    option1();
+                    menuOptions.option1();
                 }
                 
                 case 2 -> {
                     System.out.println("2. Show total animals sold.");
-                    option2();
+                    menuOptions.option2();
                 }
                 
                 case 3 -> {
                     System.out.println("3. Show total pets left.");
-                    option3();
+                    menuOptions.option3();
                 }
                 
                 case 4 -> {
                     System.out.println("4. Show total dogs, cats, birds and rats sold.");
-                    option4();
+                    menuOptions.option4();
                 }
                 
                 case 5 -> {
                     System.out.println("5. Show the owner of a pet entering the owner DNI’s.");
-                    option5();
+                    menuOptions.option5();
                 }
                 
                 case 6 -> {
                     System.out.println("6. Show the number chip and name of a pet entering the name of the pet.");
-                    option6();
+                    menuOptions.option6();
                 }
                 
                 case 7 -> {
                     System.out.println("7. Showing the characteristics of an animal (sex, age, and its the specific\n" +
                             "characteristics) entering its EAN code.");
-                    option7();
+                    menuOptions.option7();
                 }
                 
-                case 8 -> { // FIXME mostrar los chipnumber disponibles
+                case 8 -> {
                     System.out.println("8. Show if 2 pets can be mated by asking the owner for the chip number.");
-                    option8();
+                    menuOptions.option8();
                 }
 
                 case 9 -> {
                     System.out.println("9. To Know if a dog, cat, or bird likes a specific type of food.");
-                    option9();
+                    menuOptions.option9();
                 }
 
                 default -> {
@@ -160,172 +156,13 @@ public class Main {
                     throw new RuntimeException(e);
                 }
             }
-            spaceLines();
+            menuOptions.spaceLines();
         }
     }
     
-    public static void option1() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Here are all EANCodes in stock");
-        showAllEANCodes();
-        
-        System.out.println("\nGive me its EANCode");
-        int eanCode = scanner.nextInt();
-
-        boolean found = false;
-
-        for (int eancodeIsSold : sold) {
-            if (eancodeIsSold == eanCode) {
-                found = true;
-                System.out.println("Animal has been sold before");
-            }
-        }
-
-        if (!found) {
-            for(Animal animal1 : animals) {
-                if(animal1.getEanCode() == eanCode) {
-                    menuOptions.sellAnimalShowPrice(animal1);
-                    sold[soldPosition] = animal1.getEanCode();
-                    soldPosition++;
-
-                    found = true;
-                    break;
-                }
-            }
-        }
-
-        if (!found) {
-            System.out.println("We couldn't find your animal");
-        }
-
-        System.out.println("Want to sell another animal? (Y/N)");
-
-        if (scanner.next().equalsIgnoreCase("Y")) {
-            option1();
-        }
-    }
-
-    public static void option2() {
-        menuOptions.showTotalSold();
-    }
-
-    public static void option3() {
-        menuOptions.showNumberPets();
-    }
-
-    public static void option4() {
-        menuOptions.showAnimalsSold();
-    }
-
-    public static void option5() {
-        boolean anyPet = showNameOfSoldPets();
-
-        if (anyPet) {
-            System.out.println("Enter DNI");
-            String dni = scanner.next();
-
-            menuOptions.showOwnPets(dni);
-        } else {
-            System.out.println("There are no pets with owner");
-        }
-        
-    }
-
-    public static void option6() {
-        boolean anyPet = showNameOfSoldPets();
-        
-        if (anyPet) {
-            System.out.println("\nChoose the name of your pet");
-            String name = scanner.next();
-            menuOptions.showChipAndName(name);
-        } else {
-            System.out.println("There are no pets sold");
-        }
-        
-        
-    }
-
-    public static void option7() {
-        System.out.println("Enter EANCODE");
-        int eanCode = scanner.nextInt();
-        menuOptions.showCharasteristics(eanCode, animals);
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Do you want to see another animal? (Y/N)");
-        String answer = scanner.next();
-        
-        if (answer.equalsIgnoreCase("Y")) {
-            option7();
-        }
-    }
-
-    public static void option8() {
-        System.out.println("Enter first chipnumber");
-        System.out.println("(Should be the same as the EANCode for simplicity and testing)");
-        int firtschipNumber = scanner.nextInt();
-
-        System.out.println("Enter second chipnumber");
-        int secondchipNumber = scanner.nextInt();
-
-        menuOptions.canMate(firtschipNumber, secondchipNumber);
-    }
-
-    public static void option9() {
-        System.out.println("Give me its EANCode");
-        int eanCode = scanner.nextInt();
-
-        System.out.println("What do you want to know if it eats it? ('Meat', 'Fish', Feed', 'Bones')");
-        String food = scanner.next();
-
-        for(Animal animal1 : animals) {
-            if(animal1.getEanCode() == eanCode) {
-                menuOptions.doLikeFood(animal1, food);
-                break;
-            }
-        }
-    }
-
-    public static boolean showNameOfSoldPets() {
-        boolean isAnyPetSold = false;
-        
-        for (Pet pet : menuOptions.getPets()) {
-            for (int soldCode : sold) {
-                if (pet.getEanCode() == soldCode) {
-                    isAnyPetSold = true;
-                    System.out.print("[" + pet.getDNI() + "] ");
-                }
-            }
-        }
-        if (isAnyPetSold) {
-            System.out.println("\nIn the line before there are the DNI(s) of the pets' owners  of pets that has been sold");
-        }
-        
-        return isAnyPetSold;
-    }
     
-    public static void spaceLines() {
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    }
 
-    public static void showAllEANCodes() {
-        System.out.print("[");
-        for (Animal animal : animals) {
-            boolean isSold = false;
-            
-            for (int i : sold) {
-                if (animal.getEanCode() == i) {
-                    isSold = true;
-                    break;
-                }
-            }
-            
-            if (!isSold) {
-                System.out.print("[" + animal.getEanCode() + "]");
-            }
-        }
-        System.out.print("]");
-    }
+    
     
     
 }

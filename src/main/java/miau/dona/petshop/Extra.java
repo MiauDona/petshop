@@ -16,7 +16,6 @@ public class Extra {
     private Bird[] birds;
     private Cat[] cats;
     private Dog[] dogs;
-    private int[] sold;
     
     public static Animal[] declareAnimals() {
         Rat rat = new Rat(1, 20, 'f', 10.3f, 2.1f);
@@ -94,9 +93,7 @@ public class Extra {
             }
         }
     }
-
     
-
     public Bird[] getBirds() {
         return birds;
     }
@@ -115,9 +112,5 @@ public class Extra {
 
     public Cat[] getCats() {
         return cats;
-    }
-
-    public int[] getSold() {
-        return sold;
     }
 }
