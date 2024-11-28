@@ -49,9 +49,6 @@ TODO 7. Showing the characteristics of an animal (sex, age, and its the specific
 TODO 8. Show if 2 pets can be mated by asking the owner for the chip number.
 TODO 9. To Know if a dog, cat, or bird likes a type of food.*/
 
-import miau.dona.petshop.Animals.Bird;
-import miau.dona.petshop.MenuOptions;
-
 import java.util.Scanner;
 
 public class Main {
@@ -81,7 +78,7 @@ public class Main {
                     
                     2. Show total animals sold. \
                     
-                    3. Show total pets. \
+                    3. Show total pets left. \
                     
                     4. Show total dogs, cats, birds and rats sold. \
                     
@@ -94,7 +91,7 @@ public class Main {
                     
                     8. Show if 2 pets can be mated by asking the owner for the chip number. \
                     
-                    9. To Know if a dog, cat, or bird likes a type of food. \
+                    9. To Know if a dog, cat, or bird likes a specific type of food. \
                     
                     \
                     
@@ -107,38 +104,48 @@ public class Main {
                     System.out.println("Leaving...");
                 }
                 case 1 -> {
+                    System.out.println("1. Sell an animal/s and show its final price.");
                     option1();
                 }
                 
                 case 2 -> {
+                    System.out.println("2. Show total animals sold.");
                     option2();
                 }
                 
                 case 3 -> {
+                    System.out.println("3. Show total pets left.");
                     option3();
                 }
                 
                 case 4 -> {
+                    System.out.println("4. Show total dogs, cats, birds and rats sold.");
                     option4();
                 }
                 
                 case 5 -> {
+                    System.out.println("5. Show the owner of a pet entering the owner DNI’s.");
                     option5();
                 }
                 
                 case 6 -> {
+                    System.out.println("6. Show the number chip and name of a pet entering the name of the pet.");
                     option6();
                 }
                 
-                case 7 -> { // FIXME 
+                case 7 -> {
+                    System.out.println("7. Showing the characteristics of an animal (sex, age, and its the specific\n" +
+                            "characteristics) entering its EAN code.");
                     option7();
                 }
                 
-                case 8 -> {
+                case 8 -> { // FIXME mostrar los chipnumber disponibles
+                    System.out.println("8. Show if 2 pets can be mated by asking the owner for the chip number.");
                     option8();
                 }
 
                 case 9 -> {
+                    System.out.println("9. To Know if a dog, cat, or bird likes a specific type of food.");
                     option9();
                 }
 
@@ -160,7 +167,7 @@ public class Main {
     public static void option1() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Here are all EANCodes");
+        System.out.println("Here are all EANCodes in stock");
         showAllEANCodes();
         
         System.out.println("\nGive me its EANCode");
@@ -239,10 +246,18 @@ public class Main {
         
     }
 
-    public static void option7() { // FIXME
+    public static void option7() {
         System.out.println("Enter EANCODE");
         int eanCode = scanner.nextInt();
         menuOptions.showCharasteristics(eanCode, animals);
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Do you want to see another animal? (Y/N)");
+        String answer = scanner.next();
+        
+        if (answer.equalsIgnoreCase("Y")) {
+            option7();
+        }
     }
 
     public static void option8() {
@@ -278,10 +293,14 @@ public class Main {
             for (int soldCode : sold) {
                 if (pet.getEanCode() == soldCode) {
                     isAnyPetSold = true;
-                    System.out.print("[" + pet.getName() + "] ");
+                    System.out.print("[" + pet.getDNI() + "] ");
                 }
             }
         }
+        if (isAnyPetSold) {
+            System.out.println("\nIn the line before there are the DNI(s) of the pets' owners  of pets that has been sold");
+        }
+        
         return isAnyPetSold;
     }
     

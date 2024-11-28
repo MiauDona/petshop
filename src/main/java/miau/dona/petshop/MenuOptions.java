@@ -116,7 +116,7 @@ public class MenuOptions extends Extra {
     }
     
     public void showNumberPets() {
-        System.out.println("Pets: " + (getPets().length-petSells));
+        System.out.println("Pets left in stock: " + (getPets().length-petSells));
     }
     
     public void showOwnPets(String dni) {
@@ -160,32 +160,32 @@ public class MenuOptions extends Extra {
     }
     
     public void showMessageForShowingCharasteristics(Animal animal) {
+        String sex = animal.getSex() == 'f' ? "female" : "male";
             switch (animal) {
                 case Dog dog -> {
-                    String pedigreePhrase = dog.isPedigree() ? " is pedigree " : " is not pedigree ";
-                    System.out.println((dog.getName() == null ? ("This dog is not sold yet and its breed is " + dog.getBreed() + ", its color is " + dog.getColor() + ", its hair is " + dog.getTypeHAIR() + " and is been alive " + dog.getAgeDays() + " days ")
+                    String pedigreePhrase = dog.isPedigree() ? " is pedigree " : " is not pedigree";
+                    System.out.println((dog.getName() == null ? ("This dog is not sold yet and its breed is " + dog.getBreed() + pedigreePhrase + ", its color is " + dog.getColor() + ", its hair is " + dog.getTypeHAIR() + ", \nit's  " + sex + " and is been alive " + dog.getAgeDays() + " days ")
                             : "Its name is " + dog.getName() + pedigreePhrase +", its owner is " + dog.getOwnerName() + " " + dog.getSurname()
                             + ", its breed is " + dog.getBreed() + ", its color is " + dog.getColor() + ", its hair is " + dog.getTypeHAIR() + " and is been alive " +dog.getAgeDays() + " days "));
 
                 }
 
                 case Cat cat -> {
-                    System.out.println((cat.getName() == null ? ("This cat is not sold yet and its breed is " + cat.getBreed() + ", its color is " + cat.getColor() + ", its hair is " + cat.getTypeHAIR() + " and is been alive " + cat.getAgeDays() + " days ") :
-                            ("Its name is " + cat.getName() + ", its owner is " + cat.getOwnerName() + " " + cat.getSurname()) + ", its breed is " + cat.getBreed() + ", its color is " + cat.getColor() + ", its hair is " + cat.getTypeHAIR() + " and is been alive " +cat.getAgeDays() + " days "));
+                    System.out.println((cat.getName() == null ? ("This cat is not sold yet and its breed is " + cat.getBreed() + ", its color is " + cat.getColor() + ", its hair is " + cat.getTypeHAIR() + ", \nit's  " + sex +" and is been alive " + cat.getAgeDays() + " days ") :
+                            ("Its name is " + cat.getName() + ", its owner is " + cat.getOwnerName() + " " + cat.getSurname()) + ", its breed is " + cat.getBreed() + ", its color is " + cat.getColor() + ", \nits hair is " + cat.getTypeHAIR() +  ", its  " + sex + " and is been alive " +cat.getAgeDays() + " days "));
                 }
 
                 case Rat rat -> {
                     System.out.println("This rat weighs " + ((Rat) rat).getWeight() + " kg, its size is " +
-                            ((Rat) rat).getSize() + " cm, it is " + rat.getSex() + ".");
+                            ((Rat) rat).getSize() + " cm, it is " +  ", and it's  " + sex);
                 }
 
                 case Bird bird -> {
                     System.out.println("This bird's type is " + ((Bird) bird).getType() + ", its color is " +
-                            ((Bird) bird).getColor() + ", it is " + bird.getSex() +
-                            " and eats: " + Arrays.toString(((Bird) bird).getEats()));
+                            ((Bird) bird).getColor() + ", and it is " + sex);
                 }
 
-                default -> System.out.println("This animal's specie is " + animal.getSpecie() + ", it is " + animal.getSex() + ".");
+                default -> System.out.println("This animal's specie is " + animal.getSpecie() + ", it is " + sex + ".");
             }
         }
     
@@ -196,26 +196,19 @@ public class MenuOptions extends Extra {
         
         for (Pet pet : getPets()) {
             if (pet.getChipNumber() == chipNumber1) {
-                System.out.println("Pet with id: " + pet.getChipNumber() + "found");
                 pet1 = pet;
-                System.out.println(pet.getChipNumber());
                 
             } else if (pet.getChipNumber() == chipNumber2) {
-                System.out.println("Pet with id: " + pet.getChipNumber() + "found");
                 pet2 = pet;
-                System.out.println(pet.getChipNumber());
             }
         }
         
-        System.out.println(pet1 != null ? pet1.getEanCode() : 0);
-        System.out.println(pet2 != null ? pet2.getEanCode() : 0);
-        
         if (pet1 == null) {
-            System.out.println(chipNumber1 + " no se ha encontrado");
+            System.out.println(chipNumber1 + " not found");
             return false;
             
         } else if (pet2 == null) {
-            System.out.println(chipNumber2 + " no se ha encontrado");
+            System.out.println(chipNumber2 + " not found");
             return false;
         }
         

@@ -1,7 +1,5 @@
 package miau.dona.petshop;
 
-import java.util.Objects;
-
 public abstract class Animal {
     private char sex;
     private int ageDays;
