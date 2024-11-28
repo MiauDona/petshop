@@ -18,10 +18,7 @@ import miau.dona.petshop.Animals.Bird;
 import miau.dona.petshop.Animals.Cat;
 import miau.dona.petshop.Animals.Dog;
 import miau.dona.petshop.Animals.Rat;
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class MenuOptions extends Extra {
@@ -157,32 +154,41 @@ public class MenuOptions extends Extra {
     public void showCharasteristics(int eanCode, Animal[] animals) {
         for (Animal animal : animals) {
             if (eanCode == animal.getEanCode()) {
-                
-                switch (animal) {
-                    case Dog dog -> {
-                        System.out.println(dog.getName() == null);
-                    }
-                    
-                    case Cat cat -> {
-                        System.out.println((cat.getName() == null ? ("This pet is not sold yet and ") : ("Its name is " + cat.getName() + "its owner is " + cat.getOwnerName() + " " + cat.getSurname()) + cat.getBreed() + ));
-                    }
-                    
-                    case Rat rat -> {
-                        System.out.println("This rat weighs " + ((Rat) rat).getWeight() + " kg, its size is " +
-                                ((Rat) rat).getSize() + " cm, it is " + rat.getSex() + ".");
-                    }
-
-                    case Bird bird -> {
-                        System.out.println("This bird's type is " + ((Bird) bird).getType() + ", its color is " +
-                                ((Bird) bird).getColor() + ", it is " + bird.getSex() +
-                                " and eats: " + Arrays.toString(((Bird) bird).getEats()));
-                    }
-
-                    default -> System.out.println("This animal's specie is " + animal.getSpecie() + ", it is " + animal.getSex() + ".");
-                }
+                showMessageForShowingCharasteristics(animal);
             }
         }
     }
+    
+    public void showMessageForShowingCharasteristics(Animal animal) {
+            switch (animal) {
+                case Dog dog -> {
+                    String pedigreePhrase = dog.isPedigree() ? " is pedigree " : " is not pedigree ";
+                    System.out.println((dog.getName() == null ? ("This dog is not sold yet and its breed is " + dog.getBreed() + ", its color is " + dog.getColor() + ", its hair is " + dog.getTypeHAIR() + " and is been alive " + dog.getAgeDays() + " days ")
+                            : "Its name is " + dog.getName() + pedigreePhrase +", its owner is " + dog.getOwnerName() + " " + dog.getSurname()
+                            + ", its breed is " + dog.getBreed() + ", its color is " + dog.getColor() + ", its hair is " + dog.getTypeHAIR() + " and is been alive " +dog.getAgeDays() + " days "));
+
+                }
+
+                case Cat cat -> {
+                    System.out.println((cat.getName() == null ? ("This cat is not sold yet and its breed is " + cat.getBreed() + ", its color is " + cat.getColor() + ", its hair is " + cat.getTypeHAIR() + " and is been alive " + cat.getAgeDays() + " days ") :
+                            ("Its name is " + cat.getName() + ", its owner is " + cat.getOwnerName() + " " + cat.getSurname()) + ", its breed is " + cat.getBreed() + ", its color is " + cat.getColor() + ", its hair is " + cat.getTypeHAIR() + " and is been alive " +cat.getAgeDays() + " days "));
+                }
+
+                case Rat rat -> {
+                    System.out.println("This rat weighs " + ((Rat) rat).getWeight() + " kg, its size is " +
+                            ((Rat) rat).getSize() + " cm, it is " + rat.getSex() + ".");
+                }
+
+                case Bird bird -> {
+                    System.out.println("This bird's type is " + ((Bird) bird).getType() + ", its color is " +
+                            ((Bird) bird).getColor() + ", it is " + bird.getSex() +
+                            " and eats: " + Arrays.toString(((Bird) bird).getEats()));
+                }
+
+                default -> System.out.println("This animal's specie is " + animal.getSpecie() + ", it is " + animal.getSex() + ".");
+            }
+        }
+    
 
     public boolean canMate(int chipNumber1, int chipNumber2) {
         Pet pet1 = null;
