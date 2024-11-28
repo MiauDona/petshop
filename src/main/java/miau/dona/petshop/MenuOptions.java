@@ -119,7 +119,7 @@ public class MenuOptions extends Extra {
     }
     
     public void showNumberPets() {
-        System.out.println(getPets().length-petSells);
+        System.out.println("Pets: " + (getPets().length-petSells));
     }
     
     public void showOwnPets(String dni) {
@@ -148,24 +148,25 @@ public class MenuOptions extends Extra {
         }
         
         if (!found) {
-            System.out.println("No chip found");
+            System.out.println("No chip number found");
         }
+        
     }
-    
     
 
     public void showCharasteristics(int eanCode, Animal[] animals) {
         for (Animal animal : animals) {
             if (eanCode == animal.getEanCode()) {
+                
                 switch (animal) {
-                    case Pet pet -> {
-                        if (pet instanceof Dog) {
-                            System.out.println(((Dog) pet).isPedigree() ? "Is pedigree and its name is " : "Its name is" + pet.getName() + ", its breed is " + ((Dog) pet).getBreed() + ", its color is " + ((Dog) pet).getColor() + ", its hair is " + ((Dog) pet).getTypeHAIR() + ", it is " + pet.getSex() + " and eats: " + Arrays.toString(((Dog) pet).getEats())) ;
-                        } else if (pet instanceof Cat) {
-                            System.out.println("Its name is " + pet.getName() + ", its breed is " + ((Cat) pet).getBreed() + ", its color is " + ((Cat) pet).getColor() + ", its hair is " + ((Cat) pet).getTypeHAIR() + ", it is " + pet.getSex() + " and eats: " + Arrays.toString(((Cat) pet).getEats()));
-                        }
+                    case Dog dog -> {
+                        System.out.println(dog.getName() == null);
                     }
-
+                    
+                    case Cat cat -> {
+                        System.out.println((cat.getName() == null ? ("This pet is not sold yet and ") : ("Its name is " + cat.getName() + "its owner is " + cat.getOwnerName() + " " + cat.getSurname()) + cat.getBreed() + ));
+                    }
+                    
                     case Rat rat -> {
                         System.out.println("This rat weighs " + ((Rat) rat).getWeight() + " kg, its size is " +
                                 ((Rat) rat).getSize() + " cm, it is " + rat.getSex() + ".");
@@ -177,7 +178,7 @@ public class MenuOptions extends Extra {
                                 " and eats: " + Arrays.toString(((Bird) bird).getEats()));
                     }
 
-                    default -> System.out.println("This animal's species is " + animal.getSpecie() + ", it is " + animal.getSex() + ".");
+                    default -> System.out.println("This animal's specie is " + animal.getSpecie() + ", it is " + animal.getSex() + ".");
                 }
             }
         }

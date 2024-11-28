@@ -126,11 +126,11 @@ public class Main {
                     option5();
                 }
                 
-                case 6 -> { // FIXME
+                case 6 -> {
                     option6();
                 }
                 
-                case 7 -> {
+                case 7 -> { // FIXME 
                     option7();
                 }
                 
@@ -212,19 +212,24 @@ public class Main {
     }
 
     public static void option5() {
-        System.out.println("Enter DNI");
-        String dni = scanner.next();
+        boolean anyPet = showNameOfSoldPets();
 
-        menuOptions.showOwnPets(dni);
+        if (anyPet) {
+            System.out.println("Enter DNI");
+            String dni = scanner.next();
+
+            menuOptions.showOwnPets(dni);
+        } else {
+            System.out.println("There are no pets with owner");
+        }
+        
     }
 
     public static void option6() {
-        System.out.println("Names of the pets that has been sold:");
-        System.out.print("[");
-        boolean anyPet = showNameOfSoldPets(); // No encuentra la mascota despues de delcararla y pone aun asi que no hay ninguna.
-        System.out.print("]");
+        boolean anyPet = showNameOfSoldPets();
+        
         if (anyPet) {
-            System.out.println("\nInput the name of the pet");
+            System.out.println("\nChoose the name of your pet");
             String name = scanner.next();
             menuOptions.showChipAndName(name);
         } else {
@@ -234,10 +239,10 @@ public class Main {
         
     }
 
-    public static void option7() {
+    public static void option7() { // FIXME
         System.out.println("Enter EANCODE");
         int eanCode = scanner.nextInt();
-        menuOptions.showCharasteristics(eanCode,animals);
+        menuOptions.showCharasteristics(eanCode, animals);
     }
 
     public static void option8() {
@@ -267,19 +272,17 @@ public class Main {
     }
 
     public static boolean showNameOfSoldPets() {
-        if (sold[0] == 0) {
-            System.out.println("There are no pets sold");
-            return false;
-        }
-
+        boolean isAnyPetSold = false;
+        
         for (Pet pet : menuOptions.getPets()) {
-            for (int soldCode : sold) { // Devuelve null
+            for (int soldCode : sold) {
                 if (pet.getEanCode() == soldCode) {
+                    isAnyPetSold = true;
                     System.out.print("[" + pet.getName() + "] ");
                 }
             }
         }
-        return true;
+        return isAnyPetSold;
     }
     
     public static void spaceLines() {
