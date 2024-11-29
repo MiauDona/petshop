@@ -5,18 +5,14 @@ import miau.dona.petshop.Animals.Cat;
 import miau.dona.petshop.Animals.Dog;
 import miau.dona.petshop.Animals.Rat;
 
+import java.util.Objects;
+
 public class Extra {
     private int nPets = 0;
-    private int nRats = 0;
-    private int nBirds = 0;
-    private int nCats = 0;
-    private int nDogs = 0;
     private Pet[] pets;
-    private Rat[] rats;
-    private Bird[] birds;
-    private Cat[] cats;
-    private Dog[] dogs;
-    
+
+
+
     public static Animal[] declareAnimals() {
         Rat rat = new Rat(1, 20, 'f', 10.3f, 2.1f);
         Cat cat = new Cat(2, 243, 'm', "blue", "persa", "Suave", 2);
@@ -43,74 +39,27 @@ public class Extra {
                 bird3, bird4, bird5, cat2, cat3, cat4, cat5};
     }
 
-    public void countAnimals(Animal[] animals) {
+    public void countPets(Animal[] animals) {
         for (Animal animal : animals) {
-            switch (animal) {
-                case Pet petTest ->  {
-                    if (petTest instanceof Dog) {
-                        this.nDogs++;
-                    } else if (petTest instanceof Cat) {
-                        this.nCats++;
-                    }
-                    this.nPets++;
-                }
-                case Rat ignored -> this.nRats++;
-                case Bird ignored -> this.nBirds++;
-                default -> System.out.println("Animal no reconocido");
+            if (Objects.requireNonNull(animal) instanceof Pet) {
+                this.nPets++;
             }
         }
     }
 
-    public void classifyAnimals(Animal[] animals) {
+
+    public void classifyPets(Animal[] animals) {
         this.pets = new Pet[this.nPets];
-        this.rats = new Rat[this.nRats];
-        this.birds = new Bird[this.nBirds];
-        this.cats = new Cat[this.nCats];
-        this.dogs = new Dog[this.nDogs];
         
         for (Animal animal : animals) {
-            switch (animal) {
-                case Pet petTest ->  {
-                    if (petTest instanceof Dog) {
-                        this.nDogs--;
-                        this.dogs[nDogs] = (Dog) petTest;
-                    } else if (petTest instanceof Cat) {
-                        nCats--;
-                        cats[nCats] = (Cat) petTest;
-                    }
-                    nPets--;
-                    pets[nPets] = petTest;
-                }
-                case Rat ratTest -> {
-                    nRats--;
-                    rats[nRats] = (Rat) ratTest;
-                }
-                case Bird birdTest -> {
-                    nBirds--;
-                    birds[nBirds] = (Bird) birdTest;
-                }
-                default -> System.out.println("Animal no reconocido");
+            if (Objects.requireNonNull(animal) instanceof Pet pet) {
+                nPets--;
+                pets[nPets] = pet;
             }
         }
-    }
-    
-    public Bird[] getBirds() {
-        return birds;
     }
 
     public Pet[] getPets() {
         return pets;
-    }
-
-    public Rat[] getRats() {
-        return rats;
-    }
-
-    public Dog[] getDogs() {
-        return dogs;
-    }
-
-    public Cat[] getCats() {
-        return cats;
     }
 }

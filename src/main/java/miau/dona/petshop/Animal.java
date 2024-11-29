@@ -6,7 +6,6 @@ public abstract class Animal {
     private final int eanCode;
     private int price = 0;
     private String specie;
-    private int animalsSold = 0;
     private String[] eats;
 
     public Animal(int eanCode, int ageDays, char sex, int price) {

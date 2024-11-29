@@ -13,21 +13,25 @@ public class MenuOptions extends Extra {
     private int catSells = 0;
     private int birdSells = 0;
     private int dogSells = 0;
-    private int petSells = catSells + birdSells + dogSells;
-    private int animalSells = ratSells + catSells + birdSells + dogSells + petSells;
+    private int petSells = 0;
+    private int animalSells = 0;
     private final Animal[] animals = Extra.declareAnimals();
+
+    // Array of EANCodes of the animals that has been sold
     int[] sold = new int[animals.length];
+
+    // Aux variable that increases when an animal is sold to save its EANCode in this position
     int soldPosition = 0;
     
     MenuOptions() {
-        countAnimals(getAnimals());
-        classifyAnimals(getAnimals());
+        countPets(getAnimals());
+        classifyPets(getAnimals());
     }
 
     public void sellAnimalShowPrice(Animal animal) {
         float price = animal.getPrice();
         
-        // If it is a pet ask the user the info required
+        // If it is a pet, ask the user the info required
         switch (animal) {
             case Pet pet -> {
                 if (pet instanceof Dog) {
@@ -60,7 +64,7 @@ public class MenuOptions extends Extra {
                 ratSells++;
             }
             
-            case Bird bird -> {
+            case Bird ignored -> {
                 System.out.println("It's a bird");
                 birdSells++;
             }
@@ -180,7 +184,7 @@ public class MenuOptions extends Extra {
             }
         }
         
-    public boolean canMate(int chipNumber1, int chipNumber2) {
+    public void canMate(int chipNumber1, int chipNumber2) {
         Pet pet1 = null;
         Pet pet2 = null;
         
@@ -197,25 +201,23 @@ public class MenuOptions extends Extra {
         // If any pet is not found don't finish the code execution
         if (pet1 == null) {
             System.out.println(chipNumber1 + " not found");
-            return false;
+            return;
             
         } else if (pet2 == null) {
             System.out.println(chipNumber2 + " not found");
-            return false;
+            return;
         }
         
         // If both sex are different (male and female) they can mate
         if (pet1.getSex() != pet2.getSex()) {
             System.out.println("They can mate");
-            return true;
-            
+
         } else {
             System.out.println("They cannot mate");
-            return false;
         }
     }
     
-    public boolean doLikeFood(Animal animal, String userFood) {
+    public void doLikeFood(Animal animal, String userFood) {
         if (animal instanceof Rat) {
             System.out.println("It doesn't eat anything from here");
             
@@ -223,13 +225,12 @@ public class MenuOptions extends Extra {
             for(String food : animal.getEats()) {
                 if(food.equals(userFood)) {
                     System.out.println(animal.getSpecie() + " likes " + userFood);
-                    return true;
+                    return;
                 }
             }
         }
 
         System.out.println(animal.getSpecie() + " doesn't like " + userFood);
-        return false;
     }
 
     public void option1() {
@@ -431,14 +432,14 @@ public class MenuOptions extends Extra {
         }
         System.out.print("]");
     }
-
-    public Animal[] getAnimals() {
-        return animals;
-    }
     
     public void showChipNumbers() {
         for (Pet pet : getPets()) {
             System.out.print("[" + pet.getChipNumber() + "]");
         }
+    }
+
+    public Animal[] getAnimals() {
+        return animals;
     }
 }

@@ -17,15 +17,7 @@ public class Rat extends Animal {
         return weight;
     }
 
-    public void setWeight(float weight) {
-        this.weight = weight;
-    }
-
     public float getSize() {
         return size;
-    }
-
-    public void setSize(float size) {
-        this.size = size;
     }
 }
