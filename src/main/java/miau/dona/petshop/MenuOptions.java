@@ -1,18 +1,4 @@
 package miau.dona.petshop;
-/*
-The application must perform the following functions:
-1. Sell an animal/s and show its final price.
-2. Show total animals sold.
-3. Show total pets. // No son las ventas, quiere numerar las mascotas
-4. Show total dogs, cats, birds and rats sold.
-5. Show the owner of a pet entering the owner DNI’s.
-6. Show the number chip and name of a pet entering the name. FIXME no se que otro nombre es
-
-7. Showing the characteristics of an animal (sex, age, and its the specific
-        characteristics) entering its EAN code.
-8. Show if 2 pets can be mated by asking the owner for the chip number.
-9. To Know if a dog, cat, or bird likes a type of food.
- */
 
 import miau.dona.petshop.Animals.Bird;
 import miau.dona.petshop.Animals.Cat;
@@ -255,6 +241,11 @@ public class MenuOptions extends Extra {
         System.out.println("\nGive me its EANCode");
         int eanCode = scanner.nextInt();
 
+        if (eanCode <= 0) {
+            System.out.println("EAN Code must be a positive integer");
+            option1();
+        }
+        
         boolean found = false;
 
         // Looks for the animal in the sold array to know if it has been sold
@@ -265,6 +256,7 @@ public class MenuOptions extends Extra {
             }
         }
         
+        // If it's not sold then sell it and add it to the sold array
         if (!found) {
             for(Animal animal1 : animals) {
                 if(animal1.getEanCode() == eanCode) {
@@ -277,11 +269,13 @@ public class MenuOptions extends Extra {
                 }
             }
         }
-
+        
+        // If the animal is not found then is not sold and send this message
         if (!found) {
             System.out.println("We couldn't find your animal");
         }
 
+        // Ask the user to sell another
         System.out.println("Want to sell another animal? (Y/N)");
 
         if (scanner.next().equalsIgnoreCase("Y")) {
@@ -302,6 +296,7 @@ public class MenuOptions extends Extra {
     }
 
     public void option5() {
+        // Show all options and if there are no pets then the user can't do anything and returns back to the menu
         boolean anyPet = showDNIOfSoldPets();
         Scanner scanner = new Scanner(System.in);
         
@@ -317,6 +312,7 @@ public class MenuOptions extends Extra {
     }
 
     public void option6() {
+        // Show all options and if there are no pets then the user can't do anything and returns back to the menu
         boolean anyPet = showNameOfSoldPets();
         Scanner scanner = new Scanner(System.in);
         if (anyPet) {
@@ -348,8 +344,8 @@ public class MenuOptions extends Extra {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Chip numbers:");
         showChipNumbers();
-        System.out.println("\nEnter first chipnumber");
         
+        System.out.println("\nEnter first chipnumber");
         int firtschipNumber = scanner.nextInt();
 
         System.out.println("Enter second chipnumber");
@@ -360,6 +356,7 @@ public class MenuOptions extends Extra {
 
     public void option9() {
         Scanner scanner = new Scanner(System.in);
+        
         System.out.println("Give me its EANCode");
         int eanCode = scanner.nextInt();
 
@@ -416,6 +413,8 @@ public class MenuOptions extends Extra {
 
     public void showAllEANCodes() {
         System.out.print("[");
+
+        // Shows all animals that aren't in the sold array
         for (Animal animal : animals) {
             boolean isSold = false;
 

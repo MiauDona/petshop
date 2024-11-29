@@ -6,7 +6,7 @@ various types of animals. All animals have in common is that they are characteri
 their sex (which must be MALE or FEMALE), the age of the animal (measured in days)
 and EAN code. 
 
-TODO The types of animals they sell are: Cats, Dogs, Birds and Rats. 
+The types of animals they sell are: Cats, Dogs, Birds and Rats. 
  Rats are considered snakes bait.
 
 The characteristics of each of them are as follows:
@@ -21,7 +21,7 @@ The animals eat:
 • Cats: fish and feed.
 • Birds: only feed.
 
-TODO When an animal is sold, it should be reflected in some variable to show the number
+When an animal is sold, it should be reflected in some variable to show the number
  of animals that have been sold in the shop. The prices of each animal is (per unit):
 • Cat: 50€.
 • Dog: 100€ (without pedigree), 200€ (with pedigree).
@@ -38,16 +38,16 @@ Animals can mate as long as one of them is male and the other female and they
 are of the same type. Rats are not allowed to mate (prohibited).
 
 The application must perform the following functions:
-TODO 1. Sell an animal/s and show its final price.
-TODO 2. Show total animals sold.
-TODO 3. Show total pets.
-TODO 4. Show total dogs, cats, birds and rats sold. 
-TODO 5. Show the owner of a pet entering the owner DNI’s.
-TODO 6. Show the number chip and name of a pet entering the name.
-TODO 7. Showing the characteristics of an animal (sex, age, and its the specific
-    characteristics) entering its EAN code.
-TODO 8. Show if 2 pets can be mated by asking the owner for the chip number.
-TODO 9. To Know if a dog, cat, or bird likes a type of food.*/
+ 1. Sell an animal/s and show its final price.
+ 2. Show total animals sold.
+ 3. Show total pets.
+ 4. Show total dogs, cats, birds and rats sold. 
+ 5. Show the owner of a pet entering the owner DNI’s.
+ 6. Show the number chip and name of a pet entering the name.
+ 7. Showing the characteristics of an animal (sex, age, and its the specific
+characteristics) entering its EAN code.
+ 8. Show if 2 pets can be mated by asking the owner for the chip number.
+ 9. To Know if a dog, cat, or bird likes a type of food.*/
 
 import java.awt.*;
 import java.util.Scanner;
@@ -56,7 +56,6 @@ public class Main {
 
     public static void main(String[] args) {
         MenuOptions menuOptions = new MenuOptions();
-        
         Scanner scanner = new Scanner(System.in);
 
         int option = -1;
@@ -66,6 +65,8 @@ public class Main {
                     Welcome to the PetShop menu \
                     
                     (for testing EANCodes are from 1 to 20, check them out on Extra.java) \
+                    
+                    (and anyways, all options are shown when selecting an option for an easier test) \
                     
                     Select an option only typing the number. TO LEAVE TYPE 0 \
                     
